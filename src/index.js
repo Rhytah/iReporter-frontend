@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Starter from './components/SampleComponent';
+import App from './components/App';
 
 
-render(<Starter />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
