@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { RegistrationConstants } from './actionTypes';
-import dispalyToast from '../../../utils/toast';
+import { dispalyToast } from '../../../utils/toast';
 import history from '../../../utils/history';
 
 export function registerUserSuccess(successMessage) {
@@ -28,7 +28,7 @@ export function registerUser(newUser) {
   return function (dispatch) {
     dispatch(registerRequest());
     return axios
-      .post('https://ah-backend-kronos-staging.herokuapp.com/api/users/', newUser, {
+      .post('https://ireporter-backend-rhytah.herokuapp.com/api/v2/auth/signup', newUser, {
         headers: { 'Content-Type': 'application/json' },
       })
       .then((response) => {

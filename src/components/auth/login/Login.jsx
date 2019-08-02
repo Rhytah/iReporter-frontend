@@ -6,7 +6,6 @@ const Login = (props) => {
   const {
     handleChange, password, username, handleSubmit,
   } = props;
-  console.log(props, 'hjjhj========>');
   return (
     <React.Fragment>
       <div className="wrapper fadeInDown">
