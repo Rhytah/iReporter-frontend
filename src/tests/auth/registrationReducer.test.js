@@ -1,5 +1,5 @@
-import userReducer from '../storeRedux/reducers/auth/authReducer';
-import * as registrationActions from '../storeRedux/actions/auth/registerActions';
+import userReducer from '../../storeRedux/reducers/auth/authReducer';
+import * as registrationActions from '../../storeRedux/actions/auth/registerActions';
 
 const initialState = {};
 const newUser = {

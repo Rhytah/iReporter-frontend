@@ -1,13 +1,8 @@
 import { toast } from 'react-toastify';
 
-export function toastSuccess(message, container_id = '') {
-  return toast.success(message, {
-    containerId: container_id,
-  });
-}
-
-export function toastFailure(message, container_id = '') {
-  toast.error(message, {
-    containerId: container_id,
-  });
-}
+export const dispalyToast = (message, toastType = 'success') => {
+  if (toastType === 'error') {
+    return toast.error(message);
+  }
+  return toast.success(message);
+};

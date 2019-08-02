@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Router } from 'react-router';
 import LandingPage from './components/Landing';
 import history from './utils/history';
-import Login from './components/auth/Login';
+import LoginModal from './components/auth/login';
 import { SignUpForm } from './components/auth/SignUpForm';
 
 function Routes() {
@@ -11,7 +11,7 @@ function Routes() {
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={LoginModal} />
         <Route exact path="/signup" component={SignUpForm} />
       </Switch>
     </Router>

@@ -1,8 +1,8 @@
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import configureMockStore from 'redux-mock-store';
-import * as registrationActions from '../storeRedux/actions/auth/registerActions';
-import RegistrationConstants from '../storeRedux/actions/auth/actionTypes';
+import * as registrationActions from '../../storeRedux/actions/auth/registerActions';
+import { RegistrationConstants } from '../../storeRedux/actions/auth/actionTypes';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);

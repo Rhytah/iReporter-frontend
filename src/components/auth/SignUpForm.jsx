@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
@@ -13,11 +14,17 @@ export class SignUpForm extends Component {
     super(props);
 
     this.state = {
-      email: '',
+      firstname: '',
+      lastname: '',
       username: '',
       password: '',
-      emailError: '',
+      email: '',
+      phone_number: '',
+      firstnameError: '',
+      lastnameError: '',
       usernameError: '',
+      emailError: '',
+      phone_numberError: '',
       passwordError: '',
       confirmpassword: '',
       confirmPasswordError: '',
@@ -58,16 +65,25 @@ export class SignUpForm extends Component {
           : 'Username should be 4 characters and cannot be integers, have white spaces or symbol',
       passwordError: passwordValidation.test(password)
         ? null
-        : 'Password should be 8 to more characters with atleast a number, capital and small letter.',
+        : 'Password should not exceed 10 characters with atleast a number, capital and small letter.',
       confirmPasswordError: confirmpassword === password ? null : "Passwords don't match",
     });
   }
 
   submitForm(event) {
     event.preventDefault();
-    const { email, username, password } = this.state;
+    const {
+      email, username, password, firstname, lastname, phone_number,
+    } = this.state;
     const { actions } = this.props;
-    const newUser = { email, username, password };
+    const newUser = {
+      email,
+      username,
+      password,
+      firstname,
+      lastname,
+      phone_number,
+    };
     actions.registerUser(newUser);
     this.handleClearForm(event);
   }
@@ -75,22 +91,31 @@ export class SignUpForm extends Component {
   handleClearForm(event) {
     event.preventDefault();
     this.setState({
-      email: '',
+      firstname: '',
+      lastname: '',
       username: '',
       password: '',
+      email: '',
+      phone_number: '',
       confirmpassword: '',
     });
   }
 
   render() {
     const {
-      email,
+      firstname,
+      lastname,
       username,
       password,
-      confirmpassword,
-      emailError,
+      email,
+      phone_number,
+      firstnameError,
+      lastnameError,
       usernameError,
+      emailError,
+      phone_numberError,
       passwordError,
+      confirmpassword,
       confirmPasswordError,
     } = this.state;
 
@@ -105,6 +130,26 @@ export class SignUpForm extends Component {
               <strong>Create </strong>
               an account
             </h2>
+            <Input
+              name="firstname"
+              type="text"
+              placeholder="First Name"
+              value={firstname}
+              handleChange={this.handleChange}
+              onBlur={this.validateFormData}
+              className={`form-control ${firstnameError ? 'is-invalid' : ''}`}
+              fieldError={firstnameError}
+            />
+            <Input
+              name="lastname"
+              type="text"
+              placeholder="Last Name"
+              value={lastname}
+              handleChange={this.handleChange}
+              onBlur={this.validateFormData}
+              className={`form-control ${lastnameError ? 'is-invalid' : ''}`}
+              fieldError={lastnameError}
+            />
             <Input
               name="email"
               type="email"
@@ -124,6 +169,17 @@ export class SignUpForm extends Component {
               onBlur={this.validateFormData}
               className={`form-control ${usernameError ? 'is-invalid' : ''}`}
               fieldError={usernameError}
+            />
+            {' '}
+            <Input
+              name="phonenumber"
+              type="text"
+              placeholder="Username"
+              value={phone_number}
+              handleChange={this.handleChange}
+              onBlur={this.validateFormData}
+              className={`form-control ${phone_numberError ? 'is-invalid' : ''}`}
+              fieldError={phone_numberError}
             />
             <Input
               name="password"

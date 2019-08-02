@@ -1,7 +1,13 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './src/index',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    filename: 'main.js',
+  },
   devtool: 'cheap-module-source-map',
   devServer: {
     stats: 'minimal',
@@ -25,6 +31,16 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        // Now we apply rule for images
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: [
+          {
+            // Using file-loader for these files
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },

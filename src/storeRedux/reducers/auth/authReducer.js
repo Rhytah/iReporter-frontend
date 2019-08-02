@@ -1,4 +1,4 @@
-import RegistrationConstants from '../../actions/auth/actionTypes';
+import { RegistrationConstants } from '../../actions/auth/actionTypes';
 
 const initialState = {};
 export default function userReducer(state = initialState, action) {
