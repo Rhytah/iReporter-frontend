@@ -2,7 +2,7 @@
 
 exports[`Landing Component matches the snapshot 1`] = `
 <div>
-  <body
+  <div
     id="page-top"
   >
     <nav
@@ -41,18 +41,18 @@ exports[`Landing Component matches the snapshot 1`] = `
             Get started
             <ul>
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/signup"
                 >
                   Sign up
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/login"
                 >
                   Login
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
@@ -83,6 +83,6 @@ exports[`Landing Component matches the snapshot 1`] = `
         </p>
       </article>
     </div>
-  </body>
+  </div>
 </div>
 `;

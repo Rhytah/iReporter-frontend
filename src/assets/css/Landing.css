@@ -2,7 +2,7 @@ nav {
   font-family: Raleway;
   font-weight: 500;
   font-size: 1em;
-  background: rgba(35, 35, 110, 0.822);
+  background: #2588b9;
   color: #ffffff;
   line-height: 0;
   position: absolute;
@@ -16,7 +16,8 @@ nav ul.navHold {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: inline-block;
+  float: right;
+  display: inline-flex;
 }
 
 nav ul li {
@@ -31,15 +32,16 @@ nav ul li.subNav ul {
   position: absolute;
   margin-top: 20px;
   padding: 20px;
-  background: rgba(35, 35, 110, 0.822);
+  background: #076492ad;
   margin-left: -20px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
 nav ul li.subNav:hover {
-  background: rgba(35, 35, 110, 0.822);
-  color: #aaa;
+  background: whitesmoke;
+  color: rgba(35, 35, 110, 0.822);
+  border-radius: 4px;
 }
 
 nav ul li.subNav:hover ul,

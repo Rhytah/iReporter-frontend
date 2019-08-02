@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../assets/css/Landing.css';
+import { Link } from 'react-router-dom';
 
 class LandingPage extends Component {
   render() {
     return (
       <div>
-        <body id="page-top">
+        <div id="page-top">
           <nav id="navigation">
             <div className="container text-center">
               <ul className="navHold">
@@ -23,10 +24,10 @@ class LandingPage extends Component {
                   Get started
                   <ul>
                     <li>
-                      <a href="/">Sign up</a>
+                      <Link to="/signup">Sign up</Link>
                     </li>
                     <li>
-                      <a href="/">Login</a>
+                      <Link to="/login">Login</Link>
                     </li>
                   </ul>
                 </li>
@@ -50,7 +51,7 @@ class LandingPage extends Component {
               </p>
             </article>
           </div>
-        </body>
+        </div>
       </div>
     );
   }
