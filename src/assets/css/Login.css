@@ -1,10 +1,11 @@
 html {
   background-color: #56baed;
+  height:100%;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  height: 100vh;
+  height: 100%;
 }
 
 a {
@@ -117,6 +118,7 @@ input[type='reset']:active {
   transform: scale(0.95);
 }
 input[type='email'],
+input[type='number'],
 input[type='text'],
 input[type='password'] {
   background-color: #f6f6f6;

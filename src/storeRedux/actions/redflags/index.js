@@ -7,8 +7,6 @@ const fetchRedflags = () => (dispatch) => {
     type: RedflagsActionTypes.FETCH_REDFLAGS_IN_PROGRESS,
   });
   return axios.get(fetchRedflagsUrl).then((response) => {
-    console.log('==============>', response.data.data);
-
     dispatch({
       type: RedflagsActionTypes.FETCH_REDFLAGS_SUCCESS,
       payload: response.data.data,

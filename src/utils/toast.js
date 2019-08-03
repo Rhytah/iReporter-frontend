@@ -6,3 +6,4 @@ export const dispalyToast = (message, toastType = 'success') => {
   }
   return toast.success(message);
 };
+export default dispalyToast;

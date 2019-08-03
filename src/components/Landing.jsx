@@ -18,6 +18,9 @@ class LandingPage extends Component {
                 on things that needs government intervention
               </p>
             </article>
+            <article>
+              <h3>{sessionStorage.getItem('message')}</h3>
+            </article>
           </div>
         </div>
       </div>

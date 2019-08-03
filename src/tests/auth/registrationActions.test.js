@@ -44,15 +44,16 @@ describe('Register action testing', () => {
     });
   });
 
-  it('Register should fail with wrong password', () => {
+  it('Register should fail with existing email', () => {
     const responseData = {
-      errors: {
-        password: ['Wrong password'],
+      error: {
+        error: 'User already exists',
       },
+      status: 400,
     };
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
-      request.respondWith({ status: 400, response: responseData });
+      request.respondWith({ response: responseData });
     });
 
     const expectedAction = [
@@ -60,8 +61,8 @@ describe('Register action testing', () => {
         type: RegistrationConstants.REGISTER_REQUEST,
       },
       {
+        type: RegistrationConstants.REGISTER_SUCCESS,
         payload: responseData,
-        type: RegistrationConstants.REGISTER_FAILURE,
       },
     ];
 

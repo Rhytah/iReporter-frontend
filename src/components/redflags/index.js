@@ -35,7 +35,7 @@ export class Redflags extends Component {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <a href="/">
+                  <a href="/redflags">
                     <span className="glyphicon glyphicon-pencil" aria-hidden="true" />
                     {' '}
 Edit
@@ -69,14 +69,12 @@ Delete
                 {redflag.image}
                 <div className="clearfix">
                   location:
-                  {redflag.lat}
-,
-                  {redflag.long}
+                  {redflag.location}
                   <br />
                   Created on:
-                  {' '}
                   {redflag.created_on}
                 </div>
+                Status:
                 {redflag.status}
                 <div className="btn-group" role="group" id="BegeniButonlari">
                   <button type="button" className="btn btn-default">
@@ -93,8 +91,9 @@ Delete
       </div>
     ));
     if (isFetching) {
-      return <Loading className="article-loader" />;
+      return <Loading />;
     }
+
     return (
       <div>
         <div className="text-center profile-card" />

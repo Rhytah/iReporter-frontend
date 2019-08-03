@@ -19,7 +19,6 @@ export class SignUpForm extends Component {
       username: '',
       password: '',
       email: '',
-      phone_number: '',
       firstnameError: '',
       lastnameError: '',
       usernameError: '',
@@ -64,7 +63,7 @@ export class SignUpForm extends Component {
           : 'Username should be 4 characters and cannot be integers, have white spaces or symbol',
       passwordError: passwordValidation.test(password)
         ? null
-        : 'Password should not exceed 10 characters with atleast a number, capital and small letter.',
+        : 'Password should be at least 6 characters with atleast a number, capital and small letter.',
       confirmPasswordError: confirmpassword === password ? null : "Passwords don't match",
     });
   }
@@ -72,7 +71,7 @@ export class SignUpForm extends Component {
   submitForm(event) {
     event.preventDefault();
     const {
-      email, username, password, firstname, lastname, phone_number,
+      email, username, password, firstname, lastname,
     } = this.state;
     const { actions } = this.props;
     const newUser = {
@@ -81,7 +80,6 @@ export class SignUpForm extends Component {
       password,
       firstname,
       lastname,
-      phone_number,
     };
     actions.registerUser(newUser);
     this.handleClearForm(event);
@@ -95,7 +93,6 @@ export class SignUpForm extends Component {
       username: '',
       password: '',
       email: '',
-      phone_number: '07999999880',
       confirmpassword: '',
     });
   }
@@ -107,7 +104,6 @@ export class SignUpForm extends Component {
       username,
       password,
       email,
-      phone_number,
       firstnameError,
       lastnameError,
       usernameError,
@@ -174,7 +170,6 @@ export class SignUpForm extends Component {
               className={`form-control ${usernameError ? 'is-invalid' : ''}`}
               fieldError={usernameError}
             />
-
             <Input
               name="password"
               type="password"

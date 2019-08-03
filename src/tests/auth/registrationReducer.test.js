@@ -16,10 +16,10 @@ it('should add a new user when passed REGISTER_SUCCESS', () => {
 });
 
 it('should add errors when passed REGISTER_FAILURE', () => {
-  const errors = {
+  const error = {
     error: 'email already exists',
   };
-  const action = registrationActions.registerUserFail(errors);
+  const action = registrationActions.registerUserFail(error);
   const newState = userReducer(initialState, action);
   expect(newState.error).toEqual('email already exists');
 });
