@@ -24,7 +24,6 @@ export class SignUpForm extends Component {
       lastnameError: '',
       usernameError: '',
       emailError: '',
-      phone_numberError: '',
       passwordError: '',
       confirmpassword: '',
       confirmPasswordError: '',
@@ -96,7 +95,7 @@ export class SignUpForm extends Component {
       username: '',
       password: '',
       email: '',
-      phone_number: '',
+      phone_number: '07999999880',
       confirmpassword: '',
     });
   }
@@ -113,7 +112,6 @@ export class SignUpForm extends Component {
       lastnameError,
       usernameError,
       emailError,
-      phone_numberError,
       passwordError,
       confirmpassword,
       confirmPasswordError,
@@ -122,9 +120,15 @@ export class SignUpForm extends Component {
     const { user } = this.props;
 
     return (
-      <div className="register-photo">
-        <div className="form-container">
-          <div className="image-holder" />
+      <div className="wrapper fadeInDown">
+        <div id="formContent">
+          <div className="fadeIn first">
+            <img
+              src="https://www.tsafindia.org/assets/images/signin.png"
+              id="icon"
+              alt="User Icon"
+            />
+          </div>
           <form onSubmit={this.submitForm}>
             <h2 className="text-center">
               <strong>Create </strong>
@@ -170,17 +174,7 @@ export class SignUpForm extends Component {
               className={`form-control ${usernameError ? 'is-invalid' : ''}`}
               fieldError={usernameError}
             />
-            {' '}
-            <Input
-              name="phonenumber"
-              type="text"
-              placeholder="Username"
-              value={phone_number}
-              handleChange={this.handleChange}
-              onBlur={this.validateFormData}
-              className={`form-control ${phone_numberError ? 'is-invalid' : ''}`}
-              fieldError={phone_numberError}
-            />
+
             <Input
               name="password"
               type="password"
@@ -207,8 +201,8 @@ export class SignUpForm extends Component {
               </Link>
             </div>
             {user.registering && <div>Creating Account...</div>}
-            <Button className="btn btn-primary btn-block">Signup</Button>
-            <Link to="/" className="already">
+            <Button className="btn btn-primary">Signup</Button>
+            <Link to="/login" className="already">
               You already have an account? Login here.
             </Link>
           </form>

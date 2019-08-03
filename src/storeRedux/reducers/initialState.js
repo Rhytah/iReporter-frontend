@@ -9,3 +9,8 @@ export const initialSignupState = {
   lregistering: false,
   user: {},
 };
+
+export const initialRedflagState = {
+  isFetching: true,
+  redflags: [],
+};

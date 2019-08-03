@@ -1,5 +1,6 @@
 import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
+import moxios from 'moxios';
+import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import * as registrationActions from '../../storeRedux/actions/auth/registerActions';
 import { RegistrationConstants } from '../../storeRedux/actions/auth/actionTypes';
@@ -7,66 +8,66 @@ import { RegistrationConstants } from '../../storeRedux/actions/auth/actionTypes
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
-// describe('Async Actions', () => {
-//   afterEach(() => {
-//     fetchMock.restore();
-//   });
+describe('Register action testing', () => {
+  beforeEach(() => moxios.install(axios));
+  afterEach(() => moxios.uninstall(axios));
 
-//   const newUser2 = {
-//     email: 'email2@example.com',
-//     username: 'username2',
-//     password: 'password2',
-//   };
+  const data = {
+    username: 'username',
+    password: 'password',
+  };
 
-//   describe('Register User Thunk', () => {
-//     it('should begin api call and REGISTER_USER_SUCCESS when registering users', () => {
-//       fetchMock.mock('*', {
-//         body: newUser2,
-//         headers: { 'content-type': 'application/json' },
-//       });
-
-//       const expectedAction = [
-//         {
-//           type: RegistrationConstants.REGISTER_REQUEST,
-//           payload: newUser2,
-//         },
-//       ];
-
-//       const store = mockStore({ newUser2 });
-//       store.dispatch(registrationActions.registerUser(newUser2));
-//       expect(store.getActions()).toEqual(expectedAction);
-//     });
-//   });
-// });
-
-describe('registerUserSuccess', () => {
-  it('should create a REGISTER_USER_SUCCESS action', () => {
-    const newUser = {
-      email: 'email@example.com',
-      username: 'username',
-      password: 'password',
-    };
-    const expectedAction = {
-      type: RegistrationConstants.REGISTER_SUCCESS,
-      payload: newUser,
+  it('should register a user', () => {
+    const responseData = {
+      data: [{}],
+      status: 200,
     };
 
-    const action = registrationActions.registerUserSuccess(newUser);
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({ response: responseData });
+    });
 
-    expect(action).toEqual(expectedAction);
+    const expectedAction = [
+      {
+        type: RegistrationConstants.REGISTER_REQUEST,
+      },
+      {
+        payload: responseData,
+        type: RegistrationConstants.REGISTER_SUCCESS,
+      },
+    ];
+
+    const store = mockStore({});
+    return store.dispatch(registrationActions.registerUser(data)).then(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
   });
-});
 
-describe('registerUserFailure', () => {
-  it('should create a REGISTER_FAILURE action', () => {
-    const errors = {};
-    const expectedAction = {
-      type: RegistrationConstants.REGISTER_FAILURE,
-      payload: errors,
+  it('Register should fail with wrong password', () => {
+    const responseData = {
+      errors: {
+        password: ['Wrong password'],
+      },
     };
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({ status: 400, response: responseData });
+    });
 
-    const action = registrationActions.registerUserFail(errors);
+    const expectedAction = [
+      {
+        type: RegistrationConstants.REGISTER_REQUEST,
+      },
+      {
+        payload: responseData,
+        type: RegistrationConstants.REGISTER_FAILURE,
+      },
+    ];
 
-    expect(action).toEqual(expectedAction);
+    const store = mockStore({});
+    return store.dispatch(registrationActions.registerUser(data)).then(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
   });
 });
