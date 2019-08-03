@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { LoginActionTypes } from './actionTypes';
-import { dispalyToast } from '../../../utils/toast';
 import history from '../../../utils/history';
 
 export const LoginUserSuccess = successMessage => ({
@@ -26,13 +25,11 @@ export const loginInUser = userData => (dispatch) => {
     .then((response) => {
       sessionStorage.setItem('token', response.data.token);
 
-      dispalyToast('You have successfully logged In!');
       dispatch(LoginUserSuccess(response.data));
 
       history.push('/');
     })
     .catch((error) => {
-      dispalyToast('Username or email does not exist!', 'error');
       dispatch(LoginUserFailure(error.response.data));
     });
 };

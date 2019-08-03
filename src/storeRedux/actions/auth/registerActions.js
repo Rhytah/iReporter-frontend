@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { RegistrationConstants } from './actionTypes';
-import dispalyToast from '../../../utils/toast';
 import history from '../../../utils/history';
 
 export function registerUserSuccess(successMessage) {
@@ -28,22 +27,15 @@ export function registerUser(newUser) {
   return function (dispatch) {
     dispatch(registerRequest());
     return axios
-      .post('https://ah-backend-kronos-staging.herokuapp.com/api/users/', newUser, {
+      .post('https://ireporter-backend-rhytah.herokuapp.com/api/v2/auth/signup', newUser, {
         headers: { 'Content-Type': 'application/json' },
       })
       .then((response) => {
         dispatch(registerUserSuccess(response.data));
-        dispalyToast('Account created. Check your email to verify', 'A');
         history.push('/login');
       })
       .catch((error) => {
         dispatch(registerUserFail(error.response.data));
-        const errors = error.response.data;
-        if (Object.keys(errors.errors).length === 1) {
-          dispalyToast(Object.values(errors.errors)[0][0], 'A');
-        } else {
-          dispalyToast('Email and username already exist', 'A');
-        }
       });
   };
 }
