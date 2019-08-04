@@ -18,19 +18,22 @@ export const registerRequest = () => ({
 export const registerUser = newUser => (dispatch) => {
   dispatch(registerRequest());
   return axios
-    .post('https://ireporter-backend-rhytah.herokuapp.com/api/v2/auth/signup', newUser, {
-      headers: { 'Content-Type': 'application/json' },
-    })
+    .post(
+      'https://ireporter-backend-rhytah.herokuapp.com/api/v2/auth/signup',
+      newUser,
+    )
     .then((response) => {
       dispatch({
         type: RegistrationConstants.REGISTER_SUCCESS,
         payload: response.data,
       });
+      return Promise.resolve(response.data);
     })
-    .catch((error) => {
+    .catch(({ response }) => {
       dispatch({
-        type: RegistrationConstants.REGISTER_SUCCESS,
-        payload: error.error,
+        type: RegistrationConstants.REGISTER_FAILURE,
+        payload: response.data.errors,
       });
+      return Promise.reject(response.data.error);
     });
 };

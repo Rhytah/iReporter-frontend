@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -26,7 +27,16 @@ export class LoginModal extends React.Component {
     event.preventDefault();
     const { actions } = this.props;
     const userData = this.state;
-    actions.loginInUser(userData);
+
+    actions
+      .loginInUser(userData)
+      .then((data) => {
+        Notify.success(data.message);
+        this.props.history.push('/');
+      })
+      .catch((response) => {
+        Notify.error(response.error);
+      });
   };
 
   render() {

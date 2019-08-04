@@ -1,7 +1,11 @@
 import { RedflagsActionTypes } from '../../actions/redflags/actionTypes';
-import { initialRedflagState } from '../initialState';
 
-const redflagsReducer = (state = initialRedflagState, action) => {
+const initialState = {
+  isFetching: true,
+  data: [],
+};
+
+const redflagsReducer = (state = initialState, action) => {
   switch (action.type) {
     case RedflagsActionTypes.FETCH_REDFLAGS_IN_PROGRESS:
       return {
@@ -11,7 +15,7 @@ const redflagsReducer = (state = initialRedflagState, action) => {
     case RedflagsActionTypes.FETCH_REDFLAGS_SUCCESS:
       return {
         ...state,
-        redflags: action.payload,
+        data: action.payload || [],
         isFetching: false,
       };
     default:

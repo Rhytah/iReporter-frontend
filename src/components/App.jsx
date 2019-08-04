@@ -5,18 +5,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import store from '../store';
 import Routes from '../Routes';
 
+// we will probably need to notify in very many places , so it makes sense to have it available to us globaly
+window.Notify = toast;
+
 export default function App() {
-  toast.configure({
-    autoClose: 10000,
-    draggable: false,
-    position: toast.POSITION.TOP_RIGHT,
-  });
   return (
     <Provider store={store}>
-      <div>
-        <ToastContainer enableMultiContainer containerId="A" />
+      <React.Fragment>
+        <ToastContainer />
         <Routes />
-      </div>
+      </React.Fragment>
     </Provider>
   );
 }

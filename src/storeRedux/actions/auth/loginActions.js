@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { LoginActionTypes } from './actionTypes';
-import history from '../../../utils/history';
 
 export const LoginUserSuccess = successMessage => ({
   type: LoginActionTypes.LOGIN_SUCCESS,
@@ -24,12 +23,11 @@ export const loginInUser = userData => (dispatch) => {
     .post(`${BackendLoginUrl}`, userData)
     .then((response) => {
       sessionStorage.setItem('token', response.data.token);
-
       dispatch(LoginUserSuccess(response.data));
-
-      history.push('/');
+      return Promise.resolve(response.data);
     })
     .catch((error) => {
       dispatch(LoginUserFailure(error.response.data));
+      return Promise.reject(error.response.data);
     });
 };
