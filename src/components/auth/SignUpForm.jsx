@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import * as registrationActions from '../../storeRedux/actions/auth/registerActions';
 import Input from './Input';
 import Button from './Button';
+import displayToast from '../../utils/toast';
 
 export class SignUpForm extends Component {
   constructor(props) {
@@ -51,12 +52,15 @@ export class SignUpForm extends Component {
     } = this.state;
 
     // eslint-disable-next-line no-useless-escape
-    const passwordValidation = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})');
+    const passwordValidation = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
+    );
     // eslint-disable-next-line no-useless-escape
     const usernameValidation = new RegExp('^([a-zA-Zd]+[-_])*[a-zA-Zd*]+$');
 
     this.setState({
-      emailError: email.length > 3 ? null : 'Email must be longer than 3 characters',
+      emailError:
+        email.length > 3 ? null : 'Email must be longer than 3 characters',
       usernameError:
         username > 3 || usernameValidation.test(username)
           ? null
@@ -64,11 +68,13 @@ export class SignUpForm extends Component {
       passwordError: passwordValidation.test(password)
         ? null
         : 'Password should be at least 6 characters with atleast a number, capital and small letter.',
-      confirmPasswordError: confirmpassword === password ? null : "Passwords don't match",
+      confirmPasswordError:
+        confirmpassword === password ? null : "Passwords don't match",
     });
   }
 
   submitForm(event) {
+    event.persist();
     event.preventDefault();
     const {
       email, username, password, firstname, lastname,
@@ -81,8 +87,15 @@ export class SignUpForm extends Component {
       firstname,
       lastname,
     };
-    actions.registerUser(newUser);
-    this.handleClearForm(event);
+    actions
+      .registerUser(newUser)
+      .then((response) => {
+        const { history } = this.props;
+        Notify.success(response.data.message);
+        this.handleClearForm(event);
+        history.push('/login');
+      })
+      .catch(error => Notify.error(error));
   }
 
   handleClearForm(event) {
@@ -187,7 +200,9 @@ export class SignUpForm extends Component {
               value={confirmpassword}
               handleChange={this.handleChange}
               onBlur={this.validateFormData}
-              className={`form-control ${confirmPasswordError ? 'is-invalid' : ''}`}
+              className={`form-control ${
+                confirmPasswordError ? 'is-invalid' : ''
+              }`}
               fieldError={confirmPasswordError}
             />
             <div className="form-group">

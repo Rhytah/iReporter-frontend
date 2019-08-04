@@ -44,9 +44,9 @@ describe('login action testing', () => {
     });
   });
 
-  it('login should fail with wrong password', () => {
+  test('login should fail with wrong password', () => {
     const responseData = {
-      errors: {
+      error: {
         password: ['Wrong password'],
       },
     };
@@ -66,7 +66,8 @@ describe('login action testing', () => {
     ];
 
     const store = mockStore({});
-    return store.dispatch(loginActions.loginInUser(data)).then(() => {
+
+    store.dispatch(loginActions.loginInUser(data)).then(() => {
       expect(store.getActions()).toEqual(expectedAction);
     });
   });

@@ -5,6 +5,9 @@
     "es6": true,
     "jest": true
   },
+  "globals": {
+    "Notify": true
+  },
   "extends": [
     "eslint:recommended",
     "airbnb",
@@ -25,10 +28,12 @@
     "no-debugger": "off",
     "no-console": "off",
     "no-unused-vars": "warn",
-    "react/prop-types": "warn",
     "react/prefer-stateless-function": 0,
     "import/no-named-as-default": 0,
+    " react/destructuring-assignment": "off",
+    "react/prop-types": "off",
     "import/prefer-default-export": "off",
+    "max-len": "off",
     "react/jsx-filename-extension": [
       1,
       {

@@ -5,7 +5,11 @@ import Login from '../../../components/auth/login/Login';
 
 function renderLoginModal(args) {
   const defaultProps = {
-    actions: { loginInUser: jest.fn() },
+    actions: {
+      loginInUser: jest
+        .fn()
+        .mockResolvedValue({ data: { message: 'Login was successfull' } }),
+    },
     loginState: {},
   };
   const props = { ...defaultProps, ...args };
