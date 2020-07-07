@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable camelcase */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -9,15 +12,14 @@ export class Navigation extends Component {
     isLoggedIn: false,
   };
 
-  componentWillMount() {
-    if (sessionStorage.getItem('token')) {
-      this.setState({
-        isLoggedIn: true,
-      });
-    }
-  }
+  handleLogout = () => {
+    sessionStorage.removeItem('token');
+    this.setState({
+      isLoggedIn: false,
+    });
+  };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { loggedIn } = nextProps;
     // eslint-disable-next-line react/destructuring-assignment
     if (nextProps.loggedIn !== this.props.loggedIn) {
@@ -27,12 +29,13 @@ export class Navigation extends Component {
     }
   }
 
-  handleLogout = () => {
-    sessionStorage.removeItem('token');
-    this.setState({
-      isLoggedIn: false,
-    });
-  };
+  UNSAFE_componentWillMount() {
+    if (sessionStorage.getItem('token')) {
+      this.setState({
+        isLoggedIn: true,
+      });
+    }
+  }
 
   render() {
     const { isLoggedIn } = this.state;
@@ -51,26 +54,26 @@ export class Navigation extends Component {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-custom">
               {!isLoggedIn ? (
-                <Fragment>
-                  <li
-                    className="nav-item active"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
-                  >
-                    <Link className="nav-link" to="/signup">
-                      Register
-                    </Link>
-                  </li>
-                  <li
-                    className="nav-item"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
-                  >
-                    <Link className="nav-link" to="/login">
-                      Login
-                    </Link>
-                  </li>
-                </Fragment>
+            <Fragment>
+                <li
+                  className="nav-item active"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
+                  <Link className="nav-link" to="/signup">
+                    Register
+                  </Link>
+                </li>
+              <li
+                  className="nav-item"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+              >
+                  <Link className="nav-link" to="/login">
+                    Login
+                  </Link>
+              </li>
+            </Fragment>
               ) : (
                 <Fragment>
                   <li
