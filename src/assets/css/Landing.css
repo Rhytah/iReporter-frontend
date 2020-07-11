@@ -111,6 +111,13 @@ nav .navResponsive:hover {
 .hidels {
   display: none;
 }
+.layout{
+  /* background-image: url('/src/assets/images/2.jpg'); */
+  background-size: cover;
+  background-color:whitesmoke;
+ 
+}
+
 
 @media only screen and (max-width: 991px) {
   nav ul.navHold {

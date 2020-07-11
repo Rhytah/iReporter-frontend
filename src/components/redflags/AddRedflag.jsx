@@ -2,20 +2,12 @@ import React from 'react';
 import {
   Form,
   Select,
-  InputNumber,
-  Switch,
-  Radio,
-  Slider,
   Button,
   Upload,
-  Rate,
-  Checkbox,
-  Row,
-  Col,
   Layout,
   Input,
 } from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 const { Content } = Layout;
